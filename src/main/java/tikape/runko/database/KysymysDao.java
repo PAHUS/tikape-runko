@@ -43,7 +43,7 @@ public class KysymysDao implements Dao<Kysymys,Integer>{
             PreparedStatement ps2 = conn.prepareStatement("SELECT * FROM Vastaus WHERE Vastaus.kysymys_id = " + rs.getInt("id"));
             ResultSet rs2 = ps2.executeQuery();
             while(rs2.next()){
-                vastaukset.add(new Vastaus(rs2.getInt("id"),rs2.getString("vastausteksi"),rs2.getBoolean("oikein")));
+                vastaukset.add(new Vastaus(rs2.getInt("id"),rs2.getString("vastausteksti"),rs2.getBoolean("oikein")));
             }
             kysymys.setVastaukset(vastaukset);
             kysymykset.add(kysymys);

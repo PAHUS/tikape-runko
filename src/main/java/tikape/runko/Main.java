@@ -21,11 +21,11 @@ public class Main {
         Database database = new Database("jdbc:sqlite:" + tied.getAbsolutePath());
         database.init();
 
-        //KysymysDao kysdao = new KysymysDao(database);
+        KysymysDao kysdao = new KysymysDao(database);
                 
         Spark.get("*", (req, res) -> {
             HashMap map = new HashMap<>();
-            map.put("kysymykset", "testi"/*, kysdao.findAll()*/);
+            map.put("testi","testi2" /* , kysdao.findAll()*/);
             return new ModelAndView(map, "index");
         }, new ThymeleafTemplateEngine());
 
