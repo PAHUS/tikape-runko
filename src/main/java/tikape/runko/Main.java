@@ -38,7 +38,13 @@ public class Main {
             return null;
         });
         
-        
+        Spark.post("/poista/:id", (req,res)->{
+            Integer id = Integer.parseInt(req.params(":id"));
+            kysdao.delete(id);
+            
+            res.redirect("/");
+            return null;
+        });
 
         
         

@@ -84,7 +84,12 @@ public class KysymysDao implements Dao<Kysymys,Integer>{
 
     @Override
     public void delete(Integer key) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Connection conn = database.getConnection();
+        PreparedStatement ps = conn.prepareStatement("DELETE FROM Kysymys WHERE id = ?");
+        ps.setInt(1, key);
+        ps.executeUpdate();
+        ps.close();
+        conn.close();
     }
     
     
