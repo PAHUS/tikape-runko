@@ -9,6 +9,11 @@
     <body>
         <h1>Kysymykset:</h1>
         
+        <ol>
+            <li th:each="kysymys : ${kysymykset}">
+                <span th:text="${kysymys.kysymysteksti}">Kysymyksen teksti</span>
+            </li>
+        </ol>
         
         <h2>Luo uusi kysymys:</h2>
         <form method="POST" action="/kysymys">
@@ -28,20 +33,12 @@
                 <tr>
                     <td>Kysymysteksti:</td>
                     <td>
-                        <input type="text" name="aihe"/>
+                        <input type="text" name="kysymysteksti"/>
                     </td>
                 </tr>
             </table>
             <input type="submit" value="Luo kysymys"/>
         </form> 
-        
-        <!--
-        <ol>
-            <li th:each="kysymys : ${kysymykset}">
-                <span th:text="${kysymys.nimi}">Tehtävän nimi</span>
-            </li>
-        </ol>
-        -->
         
     </body>
 </html>

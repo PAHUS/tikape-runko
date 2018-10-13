@@ -10,8 +10,7 @@ public class Kysymys {
         private String kysymysteksti;
         private List<Vastaus> vastaukset;
 
-    public Kysymys(int id, String kurssi, String aihe, String teksti) {
-        this.id = id;
+    public Kysymys(String kurssi, String aihe, String teksti) {
         this.kurssi = kurssi;
         this.aihe = aihe;
         this.kysymysteksti = teksti;

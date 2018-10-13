@@ -1,7 +1,6 @@
 package tikape.runko;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
 import spark.ModelAndView;
 import spark.Spark;
@@ -25,9 +24,19 @@ public class Main {
                 
         Spark.get("*", (req, res) -> {
             HashMap map = new HashMap<>();
-            map.put("testi","testi2" /* , kysdao.findAll()*/);
+            map.put("kysymykset", kysdao.findAll());
             return new ModelAndView(map, "index");
         }, new ThymeleafTemplateEngine());
+        
+        Spark.post("/kysymys", (req,res)->{
+            String kurssi = req.queryParams("kurssi");
+            String aihe = req.queryParams("aihe");
+            String kysymysteksti = req.queryParams("kysymysteksti");
+            
+            kysdao.saveOrUpdate(new Kysymys(kurssi, aihe, kysymysteksti));
+            res.redirect("/");
+            return null;
+        });
 
         
         
