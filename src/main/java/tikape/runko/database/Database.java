@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Database {
 
-    private String databaseAddress;
+    final String databaseAddress;
 
     public Database(String databaseAddress) throws ClassNotFoundException {
         this.databaseAddress = databaseAddress;
