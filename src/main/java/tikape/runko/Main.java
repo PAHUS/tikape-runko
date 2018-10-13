@@ -7,7 +7,6 @@ import spark.Spark;
 import static spark.Spark.*;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
 import tikape.runko.database.Database;
-import tikape.runko.database.OpiskelijaDao;
 
 public class Main {
 
@@ -21,9 +20,17 @@ public class Main {
         Database database = new Database("jdbc:sqlite:" + tied.getAbsolutePath());
         database.init();
 
-        OpiskelijaDao opiskelijaDao = new OpiskelijaDao(database);
+        KysymysDao kysdao = new KysymysDao(database);
 
-        get("/", (req, res) -> {
+        Spark.get("*", (req, res) -> {
+            HashMap map = new HashMap<>();
+            map.put("kysymykset", kysdao.findAll());
+            return new ModelAndView(map, "index");
+        }, new ThymeleafTemplateEngine());
+
+        
+        
+        /*get("/", (req, res) -> {
             HashMap map = new HashMap<>();
             map.put("viesti", "tervehdys");
 
@@ -42,6 +49,6 @@ public class Main {
             map.put("opiskelija", opiskelijaDao.findOne(Integer.parseInt(req.params("id"))));
 
             return new ModelAndView(map, "opiskelija");
-        }, new ThymeleafTemplateEngine());
+        }, new ThymeleafTemplateEngine());*/
     }
 }

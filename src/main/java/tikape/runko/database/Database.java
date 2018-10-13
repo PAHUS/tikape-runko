@@ -49,6 +49,7 @@ public class Database {
                     "id Integer PRIMARY KEY);");
         lista.add("CREATE TABLE Vastaus(\n" +
                     "id Integer PRIMARY KEY,\n" +
+                    "vastausteksti varchar(500), \n"+
                     "oikein Boolean,\n" +
                     "kysymys_id integer,\n" +
                     "FOREIGN KEY (kysymys_id) REFERENCES Kysymys(id));");
