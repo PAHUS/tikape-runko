@@ -7,12 +7,13 @@
     </head>
 
     <body>
-        <h1>Kysymykset:</h1>
+        <h1><a href="/kys"> Kysymykset:</a></h1> 
         
         <ul>
             <li th:each="kysymys : ${kysymykset}">
-                
-                <span th:text="${kysymys.kysymysteksti}">Kysymyksen teksti</span><form method ="POST" th:action="@{~/poista/{id}(id=${kysymys.id})}"><input type="submit" value="Poista"/></form>
+                <a href="/">
+                    <span th:text="${kysymys.kysymysteksti}">Kysymyksen teksti</span><form method ="POST" th:action="@{~/poista/{id}(id=${kysymys.id})}"><input type="submit" value="Poista"/></form>
+                </a>
             </li>
         </ul>
         

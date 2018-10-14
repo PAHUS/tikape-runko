@@ -21,11 +21,17 @@ public class Main {
         database.init();
 
         KysymysDao kysdao = new KysymysDao(database);
-                
-        Spark.get("*", (req, res) -> {
+        
+        
+        Spark.get("/", (req, res) -> {
             HashMap map = new HashMap<>();
             map.put("kysymykset", kysdao.findAll());
             return new ModelAndView(map, "index");
+        }, new ThymeleafTemplateEngine());
+        
+        Spark.get("/kys", (req,res) ->{
+            HashMap map = new HashMap<>();
+            return new ModelAndView(map, "kysind");
         }, new ThymeleafTemplateEngine());
         
         Spark.post("/kysymys", (req,res)->{
