@@ -29,9 +29,9 @@ public class Main {
             return new ModelAndView(map, "index");
         }, new ThymeleafTemplateEngine());
         
-        Spark.get("/kys", (req,res) ->{
+        Spark.get("/vastaukset/:id", (req,res) ->{
             HashMap map = new HashMap<>();
-            return new ModelAndView(map, "kysind");
+            return new ModelAndView(map, "vastind");
         }, new ThymeleafTemplateEngine());
         
         Spark.post("/kysymys", (req,res)->{
