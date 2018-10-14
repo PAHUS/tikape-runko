@@ -34,7 +34,7 @@ public class VastausDao implements Dao<Vastaus, Integer>{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    /*
+    
     public List<Vastaus> findAllFrom(Integer kysKey) throws SQLException {
         List<Vastaus> vastaukset = new ArrayList<>();
         Kysymys kysymys = kysDao.findOne(kysKey);
@@ -46,12 +46,16 @@ public class VastausDao implements Dao<Vastaus, Integer>{
         ResultSet rs = ps.executeQuery();
         while(rs.next()){
             Vastaus vastaus = new Vastaus(rs.getInt("id"),rs.getString("vastausteksti"),rs.getBoolean("oikein"));
-            
+            vastaukset.add(vastaus);
         }
-
+        kysymys.setVastaukset(vastaukset);
+        
+        rs.close();
+        ps.close();
+        conn.close();
         return vastaukset;
     }
-    */
+    
     @Override
     public Vastaus findOne(Integer key) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -84,9 +88,9 @@ public class VastausDao implements Dao<Vastaus, Integer>{
         
         
         conn.close();
-        vastaukset.add(null);
+        vastaukset.add(object);
         kys.setVastaukset(vastaukset);
-        return null;
+        return object;
     }
     
     

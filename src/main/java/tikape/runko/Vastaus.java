@@ -6,6 +6,9 @@ public class Vastaus {
     private String vastausteksti;
     private Boolean oikein;
 
+    public Vastaus(String teksti){
+        this.vastausteksti = teksti;
+    }
     public Vastaus(int id, String teksti, Boolean oikein) {
         this.id = id;
         this.vastausteksti = teksti;

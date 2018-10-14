@@ -7,6 +7,7 @@ import spark.Spark;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
 import tikape.runko.database.Database;
 import tikape.runko.database.KysymysDao;
+import tikape.runko.database.VastausDao;
 
 public class Main {
 
@@ -21,6 +22,7 @@ public class Main {
         database.init();
 
         KysymysDao kysdao = new KysymysDao(database);
+        VastausDao vastDao = new VastausDao(database, kysdao);
         
         
         Spark.get("/", (req, res) -> {
@@ -31,8 +33,9 @@ public class Main {
         
         Spark.get("/vastaukset/:id", (req,res) ->{
             HashMap map = new HashMap<>();
-            map.put("kysymys",kysdao.findOne(Integer.parseInt(req.params(":id"))));
-            //map.put("vastaukset", null); ///// TÄNNE
+            int id = Integer.parseInt(req.params(":id"));
+            map.put("kysymys",kysdao.findOne(id));
+            map.put("vastaukset", vastDao.findAllFrom(id)); ///// TÄNNE
             return new ModelAndView(map, "vastind");
         }, new ThymeleafTemplateEngine());
         
@@ -51,6 +54,15 @@ public class Main {
             kysdao.delete(id);
             
             res.redirect("/");
+            return null;
+        });
+        Spark.post("/vastaa/:id", (req,res)->{
+           int id = Integer.parseInt(req.params(":id"));
+           String vastausTeksti = req.queryParams("teksti");
+           vastDao.saveTo(new Vastaus(vastausTeksti), id);
+            
+            
+            res.redirect("/vastaukset/" + id);
             return null;
         });
 
