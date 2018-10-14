@@ -79,7 +79,18 @@ public class KysymysDao implements Dao<Kysymys,Integer>{
 
     @Override
     public Kysymys findOne(Integer key) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Connection conn = database.getConnection();
+        PreparedStatement ps = conn.prepareStatement("SELECT * FROM Kysymys WHERE id = ?");
+        ps.setInt(1, key);
+        ResultSet rs = ps.executeQuery();
+        rs.next();
+        Kysymys kysymys = new Kysymys(rs.getString("kurssi"),rs.getString("aihe"),rs.getString("kysymysteksti"));
+        kysymys.setId(key);
+        
+        rs.close();
+        ps.close();
+        conn.close();        
+        return kysymys;
     }
 
     @Override

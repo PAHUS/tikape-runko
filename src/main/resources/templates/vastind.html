@@ -7,7 +7,13 @@
     </head>
     
     <body>
+        
+        
+        <h3> Kurssi:</h3> <span th:text ="${kysymys.kurssi}"/>
+        <h3>Aihe:</h3> <span th:text ="${kysymys.aihe}"/>
+        <h3>Kysymys:</h3> <span th:text ="${kysymys.kysymysteksti}"/>
+        
         <h1>Vastaukset:</h1>
-        <h2 th:text ="${kysymys.kysymysteksti}"/>
+        
     </body>
 </html>

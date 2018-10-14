@@ -31,6 +31,8 @@ public class Main {
         
         Spark.get("/vastaukset/:id", (req,res) ->{
             HashMap map = new HashMap<>();
+            map.put("kysymys",kysdao.findOne(Integer.parseInt(req.params(":id"))));
+            //map.put("vastaukset", null); ///// TÄNNE
             return new ModelAndView(map, "vastind");
         }, new ThymeleafTemplateEngine());
         
