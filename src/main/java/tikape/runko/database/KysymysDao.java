@@ -92,6 +92,8 @@ public class KysymysDao implements Dao<Kysymys,Integer>{
         conn.close();        
         return kysymys;
     }
+    
+    
 
     @Override
     public void delete(Integer key) throws SQLException {

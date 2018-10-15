@@ -25,8 +25,26 @@ public class VastausDao implements Dao<Vastaus, Integer>{
 
     @Override
     public void delete(Integer key) throws SQLException {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-
+        Connection conn = db.getConnection();
+        PreparedStatement ps = conn.prepareStatement("DELETE FROM Vastaus WHERE id = ?");
+        ps.setInt(1, key);
+        ps.executeUpdate();
+        ps.close();
+        conn.close();
+    }
+    
+    public Integer findParent(Integer key) throws SQLException {
+        Connection conn = db.getConnection();
+        PreparedStatement ps = conn.prepareStatement("SELECT * FROM Vastaus WHERE id = ?");
+        ps.setInt(1, key);
+        ResultSet rs = ps.executeQuery();
+        rs.next();
+        int id = rs.getInt("kysymys_id");
+        rs.close();
+        ps.close();
+        conn.close();
+        
+        return id;
     }
 
     @Override

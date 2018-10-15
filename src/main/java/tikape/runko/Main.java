@@ -51,9 +51,18 @@ public class Main {
         
         Spark.post("/poista/:id", (req,res)->{
             Integer id = Integer.parseInt(req.params(":id"));
+            
             kysdao.delete(id);
             
             res.redirect("/");
+            return null;
+        });
+        Spark.post("/poistaVastaus/:id", (req,res)->{
+            Integer id = Integer.parseInt(req.params(":id"));
+            int id2 = vastDao.findParent(id);
+            vastDao.delete(id);
+            
+            res.redirect("/vastaukset/" + id2);
             return null;
         });
         Spark.post("/vastaa/:id", (req,res)->{
