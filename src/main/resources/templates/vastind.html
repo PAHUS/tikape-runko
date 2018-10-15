@@ -17,13 +17,14 @@
         <h1>Vastaukset:</h1>
         <ul>
             <li th:each="vastaus : ${vastaukset}">
-                <span th:text="${vastaus.vastausteksti}">Vastauksen teksti</span><form method ="POST" th:action="@{~/poistaVastaus/{id}(id=${vastaus.id})}"><input type="submit" value="Poista"/></form>
+                <span th:text="${vastaus.vastausteksti}">Vastauksen teksti</span><br/><span th:text =" Oikein" th:if ="${vastaus.oikein}" /><span th:text =" Väärin" th:unless ="${vastaus.oikein}" /><form method ="POST" th:action="@{~/poistaVastaus/{id}(id=${vastaus.id})}"><input type="submit" value="Poista"/></form>
             </li>
         </ul>
         <h3>Vastaa:</h3>
         
         <form method="POST" th:action="@{~/vastaa/{id}(id=${kysymys.id})}">
             <input type="text" name="teksti"/>
+            Oikein:<input type="checkbox" name="totta" value="oikein"/>
             <input type="submit" value="Syötä"/>
         </form> 
         

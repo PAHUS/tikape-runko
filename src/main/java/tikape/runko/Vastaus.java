@@ -9,6 +9,10 @@ public class Vastaus {
     public Vastaus(String teksti){
         this.vastausteksti = teksti;
     }
+    public Vastaus(String teksti, Boolean totta){
+        this.vastausteksti = teksti;
+        this.oikein = totta;
+    }
     public Vastaus(int id, String teksti, Boolean oikein) {
         this.id = id;
         this.vastausteksti = teksti;

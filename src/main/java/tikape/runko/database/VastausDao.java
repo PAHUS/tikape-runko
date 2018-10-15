@@ -89,9 +89,10 @@ public class VastausDao implements Dao<Vastaus, Integer>{
         List<Vastaus> vastaukset = kys.getVastaukset();
         
         Connection conn = db.getConnection();
-        PreparedStatement ps = conn.prepareStatement("INSERT INTO Vastaus(vastausteksti, kysymys_id) VALUES (?,?)");
+        PreparedStatement ps = conn.prepareStatement("INSERT INTO Vastaus(vastausteksti, oikein, kysymys_id) VALUES (?,?,?)");
         ps.setString(1, object.getVastausteksti());
-        ps.setInt(2, kysInt);
+        ps.setBoolean(2, object.getOikein());
+        ps.setInt(3, kysInt);
         ps.executeUpdate();
         ps.close();
         
