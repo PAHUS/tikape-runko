@@ -99,8 +99,12 @@ public class KysymysDao implements Dao<Kysymys,Integer>{
     public void delete(Integer key) throws SQLException {
         Connection conn = database.getConnection();
         PreparedStatement ps = conn.prepareStatement("DELETE FROM Kysymys WHERE id = ?");
+        PreparedStatement ps2 = conn.prepareStatement("DELETE FROM Vastaus WHERE kysymys_id = ?");
         ps.setInt(1, key);
+        ps2.setInt(1, key);
         ps.executeUpdate();
+        ps2.executeUpdate();
+        ps2.close();
         ps.close();
         conn.close();
     }
